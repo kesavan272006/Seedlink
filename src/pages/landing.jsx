@@ -5,15 +5,15 @@ const Landing = () => {
   const navigate = useNavigate()
   
   return (
-    <div className="min-h-screen bg-bg-primary text-white">
+    <div className="min-h-screen bg-bg-primary text-gold-primary animate-fade-in">
       {/* Hero Section */}
-      <header className="container mx-auto px-4 py-8 flex justify-between items-center">
-        <div className="text-2xl font-bold">
-          <span className="tracking-wide">VisioBiz<span className="text-gold-primary font-extrabold">AI</span></span>
+      <header className="container mx-auto px-4 py-8 flex justify-between items-center border-b border-gold-primary/30">
+        <div className="text-2xl font-extrabold tracking-wide">
+          VisioBiz<span className="text-gold-primary font-extrabold">AI</span>
         </div>
         <div className="flex gap-4">
-          <Link to="/signin" className="text-white hover:text-gold-light">Sign In</Link>
-          <Link to="/signup" className="bg-gold-primary text-black px-4 py-2 rounded-lg font-medium hover:bg-gold-light transition-all hover:-translate-y-0.5">Sign Up</Link>
+          <Link to="/auth" className="text-gold-primary hover:text-gold-light font-semibold transition-colors">Sign In</Link>
+          <Link to="/auth" className="bg-gold-primary text-bg-primary px-4 py-2 rounded-lg font-semibold hover:bg-gold-light transition-all hover:-translate-y-0.5">Sign Up</Link>
         </div>
       </header>
 
@@ -23,16 +23,16 @@ const Landing = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="md:w-1/2 space-y-6">
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
                   Empower Local Businesses with <span className="text-gold-primary">AI + AR</span> Technology
                 </h1>
-                <p className="text-lg md:text-xl opacity-90">
+                <p className="text-lg md:text-xl text-gold-light opacity-90">
                   VisioBiz AI helps local Indian businesses create immersive, trustworthy digital storefronts with just a few photos or videos.
                 </p>
                 <div className="pt-4">
                   <button 
-                    onClick={() => navigate('/signin')} 
-                    className="bg-gold-primary text-black px-6 py-3 rounded-lg font-medium text-lg hover:bg-gold-light transition-all hover:-translate-y-1 shadow-lg"
+                    onClick={() => navigate('/auth')} 
+                    className="bg-gold-primary text-bg-primary px-6 py-3 rounded-lg font-semibold text-lg hover:bg-gold-light transition-all hover:-translate-y-1 shadow-gold"
                   >
                     Get Started
                   </button>
