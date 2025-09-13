@@ -4,6 +4,7 @@ import Signin from './pages/signin';
 import Home from './pages/home';
 import Navbar from './components/Navbar';
 import ShopkeeperDashboard from './pages/shopkeeper-dashboard';
+import NearMe from './pages/nearMe';
 function App() {
   return (
     <div className="min-h-screen bg-bg-primary w-full overflow-x-hidden">
@@ -14,6 +15,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signin isSignUp={true} />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/nearme" element={<NearMe />} />
           <Route path="/shopkeeper-dashboard" element={<ShopkeeperDashboard />} />
         </Routes>
       </main>
