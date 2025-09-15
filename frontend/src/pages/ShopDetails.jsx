@@ -4,6 +4,7 @@ import { doc, getDoc, collection, onSnapshot, query } from 'firebase/firestore';
 import { database } from '../config/firebase.js';
 import Lottie from 'lottie-react';
 import profileAnimation from '../../utils/profile.json';
+import Agent from './Agent';
 
 const ShopDetails = () => {
     const { shopId } = useParams();
@@ -11,6 +12,7 @@ const ShopDetails = () => {
     const [shop, setShop] = useState(null);
     const [updates, setUpdates] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showAgent, setShowAgent] = useState(false);
 
     useEffect(() => {
         if (!shopId) {
@@ -21,9 +23,15 @@ const ShopDetails = () => {
             setLoading(true);
             try {
                 const shopDocRef = doc(database, 'Users', shopId, 'businessInfo', 'data');
-                const shopDocSnap = await getDoc(shopDocRef);
-                if (shopDocSnap.exists()) {
-                    setShop({ id: shopDocSnap.id, ...shopDocSnap.data() });
+                const userDocRef = doc(database, 'Users', shopId);
+                
+                const [shopDocSnap, userDocSnap] = await Promise.all([
+                    getDoc(shopDocRef),
+                    getDoc(userDocRef)
+                ]);
+
+                if (shopDocSnap.exists() && userDocSnap.exists()) {
+                    setShop({ id: shopDocSnap.id, ...shopDocSnap.data(), email: userDocSnap.data().email });
                 } else {
                     setShop(null);
                 }
@@ -52,6 +60,26 @@ const ShopDetails = () => {
         const unsubscribeUpdates = fetchShopUpdates();
         return () => unsubscribeUpdates();
     }, [shopId, navigate]);
+    
+    const handleUpdateClick = (update) => {
+      navigate(`/post/${update.uniqueId}`, { state: { post: update } });
+    };
+    const handleView3DClick = () => {
+        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            navigate('/shop-3d', { state: { arImages: shop.arImages, shopName: shop.businessName, isAR: true } });
+        } else {
+            navigate('/shop-3d', { state: { arImages: shop.arImages, shopName: shop.businessName, isAR: false } });
+        }
+    };
+    const handleLogFeedback = (shopId, messages) => {
+      console.log("Feedback logged for shop:", shopId, "Messages:", messages);
+      alert("Feedback logged successfully!");
+    };
+    const handleSendReport = (shopEmail, report) => {
+      console.log("Report sent to:", shopEmail, "Report:", report);
+      alert("Report sent to shop owner!");
+    };
 
     if (loading) {
         return (
@@ -73,19 +101,8 @@ const ShopDetails = () => {
             </div>
         );
     }
-    const handleUpdateClick = (update) => {
-      navigate(`/post/${update.uniqueId}`, { state: { post: update } });
-    };
-    const handleView3DClick = () => {
-        const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-        if (isMobile) {
-            navigate('/shop-3d', { state: { arImages: shop.arImages, shopName: shop.businessName, isAR: true } });
-        } else {
-            navigate('/shop-3d', { state: { arImages: shop.arImages, shopName: shop.businessName, isAR: false } });
-        }
-    };
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-6">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-6 relative">
             <div className="max-w-7xl mx-auto">
                 <div className="bg-gray-800/50 p-6 md:p-8 rounded-xl border border-gold-primary/20 mb-8">
                     <div className="flex items-center justify-between">
@@ -103,6 +120,12 @@ const ShopDetails = () => {
                             {shop.city && shop.state && (
                                 <p className="text-gray-400 mt-1">📍 {shop.city}, {shop.state}</p>
                             )}
+                            <button
+                                onClick={() => setShowAgent(true)}
+                                className="mt-4 px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition-colors"
+                            >
+                                Chat with AI Assistant
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -162,6 +185,19 @@ const ShopDetails = () => {
                     )}
                 </div>
             </div>
+            {showAgent && (
+                <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+                    <div className="relative w-full max-w-2xl h-3/4">
+                        <Agent 
+                            shopData={shop} 
+                            shopUpdates={updates}
+                            onClose={() => setShowAgent(false)} 
+                            onLogFeedback={handleLogFeedback}
+                            onSendReport={handleSendReport}
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

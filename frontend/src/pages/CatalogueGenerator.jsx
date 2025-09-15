@@ -41,7 +41,7 @@ const CatalogueGenerator = () => {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/catalogue/generate_catalogue/", {
+      const res = await fetch("https://seedlink-mb3t.onrender.com/api/catalogue/generate_catalogue/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const CatalogueGenerator = () => {
         }
       const data = await res.json();
       if (data.pdf_url) {
-        const backendBase = "http://127.0.0.1:8000"; // your FastAPI URL
+        const backendBase = "https://seedlink-mb3t.onrender.com";
         setPdfUrl(backendBase + data.pdf_url);
       } else {
         alert("Failed to generate PDF");
@@ -136,7 +136,7 @@ const CatalogueGenerator = () => {
 
       {pdfUrl && (
         <div id="pdf-container" style={{ marginTop: "30px", textAlign: "center" }}>
-          <h3>Generated PDF:</h3>
+          <h3>Generated PDF: (kindly note that this feature is under development)</h3>
           <iframe
             src={pdfUrl}
             title="Generated Catalogue"

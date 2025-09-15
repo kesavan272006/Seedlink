@@ -16,7 +16,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (!userId) {
-      navigate('/login');
+      navigate('/signin');
       return;
     }
 
@@ -320,6 +320,12 @@ const Profile = () => {
             <p className="text-center text-gray-400 mt-2">Manage your business details and AR store view.</p>
           </div>
           <div className="flex justify-end mb-4">
+            <button
+              onClick={() => navigate('/catalogue')}
+              className={`bg-blue-600 text-white ${buttonClasses} mr-2`}
+            >
+              Generate Catalog
+            </button>
             <button
               onClick={() => setIsEditing(!isEditing)}
               className={`${isEditing ? 'bg-red-600' : 'bg-blue-600'} text-white ${buttonClasses}`}
