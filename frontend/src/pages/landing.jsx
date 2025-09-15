@@ -13,9 +13,9 @@ const Landing = () => {
           Seedlink<span className="text-gold-primary">AI</span>
         </div>
         <div className="space-x-6 hidden md:flex">
-          <Link to="/about" className="hover:text-gold-primary transition">About</Link>
-          <Link to="/features" className="hover:text-gold-primary transition">Features</Link>
-          <Link to="/contact" className="hover:text-gold-primary transition">Contact</Link>
+          <Link to="/" className="hover:text-gold-primary transition">About</Link>
+          <Link to="/" className="hover:text-gold-primary transition">Features</Link>
+          <Link to="/" className="hover:text-gold-primary transition">Contact</Link>
         </div>
       </header>
 
@@ -92,7 +92,7 @@ const Landing = () => {
               Join thousands of local businesses that are already building <span className="text-gold-primary">trust</span> and <span className="text-teal">visibility</span> with Seedlink AI.
             </p>
             <button
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/signin")}
               className="bg-teal px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-lg shadow-lg hover:opacity-90 transition transform hover:-translate-y-2"
             >
               Create Your Account
@@ -110,9 +110,9 @@ const Landing = () => {
             <p className="opacity-70 text-sm mt-2">Empowering local businesses with AI technology</p>
           </div>
           <div className="flex gap-8 text-sm">
-            <Link to="/about" className="hover:text-gold-primary transition">About</Link>
-            <Link to="/features" className="hover:text-gold-primary transition">Features</Link>
-            <Link to="/contact" className="hover:text-gold-primary transition">Contact</Link>
+            <Link to="/" className="hover:text-gold-primary transition">About</Link>
+            <Link to="/" className="hover:text-gold-primary transition">Features</Link>
+            <Link to="/" className="hover:text-gold-primary transition">Contact</Link>
           </div>
         </div>
         <div className="mt-6 text-center text-xs opacity-60">

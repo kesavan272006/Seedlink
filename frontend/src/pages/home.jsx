@@ -4,6 +4,7 @@ import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firesto
 import { auth, database } from '../config/firebase.js';
 import Lottie from 'lottie-react';
 import moneyAnimation from '../../utils/money.json';
+import loadingAnimation from '../../utils/loading.json';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -78,12 +79,17 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-6 flex items-center justify-center">
-        <div className="text-xl">Loading businesses...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-950 to-black">
+        <div className="w-60 h-60 flex items-center justify-center">
+          <Lottie
+            animationData={loadingAnimation}
+            loop={true}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </div>
       </div>
     );
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-6">
       <div className="max-w-7xl mx-auto">

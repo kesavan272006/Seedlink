@@ -77,9 +77,6 @@ const Navbar = () => {
               <Link to="/signin" className="text-white hover:text-gold-light font-medium relative after:absolute after:w-0 after:h-0.5 after:bg-gold-primary after:bottom-[-4px] after:left-0 hover:after:w-full after:transition-all">
                 Sign In
               </Link>
-              <Link to="/signup" className="bg-gold-primary text-black px-4 py-2 rounded-lg font-medium hover:bg-gold-light transition-all hover:-translate-y-0.5">
-                Sign Up
-              </Link>
             </>
           )}
         </div>
